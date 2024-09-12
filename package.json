@@ -1,6 +1,6 @@
 {
   "name": "@haixing_hu/json",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A JavaScript library for parsing and formatting JSON data.",
   "author": "Haixing Hu",
   "license": "Apache-2.0",
