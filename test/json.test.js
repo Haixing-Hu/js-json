@@ -85,6 +85,8 @@ describe('Unit test of the Json object', () => {
     const str = Json.stringify(obj);
     const expected = '{"decimal":2.37,"big_int":9123372036854000123,"big_float":2.3e+500}';
     expect(str).toBe(expected);
+
+    console.log(obj);
   });
 
   // it('should parse and stringify the bigint', () => {
@@ -158,5 +160,40 @@ describe('Unit test of the Json object', () => {
     const obj = { x: new Set([{ a: 1 }, { b: 2 }, { c: 3 }]), y: 'hello', z: 'abc' };
     const str = Json.stringify(obj, (k, v) => (v === 'hello' ? 'world' : v));
     expect(str).toBe('{"x":[{"a":1},{"b":2},{"c":3}],"y":"world","z":"abc"}');
+  });
+
+  it('stringify with spaces', () => {
+    const obj = {
+      x: new Set([{ a: 1 }, { b: 2 }, { c: 3 }]),
+      y: new Map([[1, { a: 2 }], [2, { b: 4 }]]),
+    };
+    const str = Json.stringify(obj, null, 2);
+    expect(str).toBe(`{
+  "x": [
+    {
+      "a": 1
+    },
+    {
+      "b": 2
+    },
+    {
+      "c": 3
+    }
+  ],
+  "y": [
+    [
+      1,
+      {
+        "a": 2
+      }
+    ],
+    [
+      2,
+      {
+        "b": 4
+      }
+    ]
+  ]
+}`);
   });
 });
