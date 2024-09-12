@@ -33,7 +33,6 @@ For more details on why JSON parsing can corrupt large numbers and how this
 library helps resolve the issue, refer to 
 [Why does JSON.parse corrupt large numbers and how to solve this?].
 
-
 ## Installation
 
 To install the library, use either npm or yarn:
@@ -43,6 +42,146 @@ npm install @haixing_hu/json
 or
 ```sh
 yarn add @haixing_hu/json
+```
+
+## Core Functionality
+
+### JSON-like Object
+
+The library provides an object similar to the standard JSON object, but with
+enhanced capabilities for handling large integers, floating-point numbers, and 
+collections like Set and Map.
+
+```javascript
+import Json from '@haixing_hu/json';
+
+// parse numbers outside the safe range
+const str1 = '{"decimal":2.370,"big_int":9123372036854000123,"big_float":2.3e+500}';
+const obj1 = Json.parse(text);
+console.log(obj1.decimal);   // 2.37
+console.log(obj1.big_int);   // 9123372036854000123n
+console.log(obj1.big_float); // LosslessNumber { value: '2.3e+500', isLosslessNumber: true }
+console.log(String(obj1.big_float)); // '2.3e+500'
+
+// stringify numbers outside the safe range
+const json1 = Json.stringify(obj1);
+console.log(json1); // '{"decimal":2.37,"big_int":9123372036854000123,"big_float":"2.3e+500"}'
+
+// stringify collections
+const obj2 = { 
+  x: new Set([{ a: 1 }, { b: 2 }, { c: 3 }]),
+  y: new Map([[1, { a: 2 }], [2, { b: 4 }]]),
+};
+const json2 = Json.stringify(obj);
+console.log(json2); // '{"x":[{"a":1},{"b":2},{"c":3}],"y":[[1,{"a":2}],[2,{"b":4}]]}'
+
+const json3 = Json.stringify(obj, null, 2);
+console.log(json3); // 
+```
+
+### LosslessNumber Class
+
+The LosslessNumber class is used to handle floating-point numbers with full
+precision, avoiding truncation or rounding issues.
+
+```javascript
+import Json from '@haixing_hu/json';
+const parsed = Json.parse('{"float": 1.234567891234567891234}');
+console.log(parsed.float);  // LosslessNumber { value: '1.234567891234567891234' }
+
+// Convert LosslessNumber to standard number
+console.log(parsed.float.valueOf());  // 1.2345678912345679 (standard JS number)
+```
+
+### Utility Functions
+
+This library provides a set of utility functions to aid in the handling of large 
+numbers and ensure safe conversions.
+
+#### `isBigInt(value)`
+
+Checks if a string represents a `BigInt` (i.e., ends with an “n” suffix).
+
+```javascript
+import { isBigInt } from '@haixing_hu/json';
+
+console.log(isBigInt('12345n'));  // true
+console.log(isBigInt('12345'));   // false
+```
+
+#### `isInteger(value)`
+
+Checks if a string represents an integer.
+
+```javascript
+import { isInteger } from '@haixing_hu/json';
+
+console.log(isInteger('12345'));  // true
+console.log(isInteger('123.45')); // false
+```
+
+#### `isNumber(value)`
+
+Checks if a string represents a number.
+
+```javascript
+import { isNumber } from '@haixing_hu/json';
+
+console.log(isNumber('12345'));     // true
+console.log(isNumber('-123.45'));   // true
+console.log(isNumber('1.23e-11'));  // true
+console.log(isNumber('abc'));       // false
+```
+
+#### `isSafeNumber(value, options)`
+
+Checks if a string represents a number within JavaScript’s safe range.
+
+```javascript
+import { isSafeNumber } from '@haixing_hu/json';
+
+console.log(isSafeNumber('12345'));     // true
+console.log(isSafeNumber('12345678901234567890')); // false
+console.log(isSafeNumber('123.45678901234567890')); // false
+console.log(isSafeNumber('123.45678901234567890', { approx: true, requiredDigits: 16 })); // true
+``` 
+
+#### `getUnsafeReason(value)`
+
+Explains why a number represented by a string is unsafe, returning one of the 
+following reasons:
+
+- `'overflow'`
+- `'underflow'`
+- `'truncate_integer'`
+- `'truncate_float'`
+- `'none'`: when the value is safe
+
+```javascript
+import { getUnsafeReason } from '@haixing_hu/json';
+
+console.log(getUnsafeReason('12345'));     // Output: 'none'
+console.log(getUnsafeReason('12345678901234567890')); // Output: 'truncate_integer'
+console.log(getUnsafeReason('-12345678901234567890.123'));  //  Output: 'truncate_float'
+console.log(getUnsafeReason('-1e+1000'));   // Output: 'overflow'
+console.log(getUnsafeReason('1e-324'));     // Output: 'underflow'
+```
+
+#### `toSafeNumberOrThrow(value, options)`
+
+Converts a string into a number if it is safe to do so. Throws an error if the 
+number is unsafe, explaining the reason.
+
+```javascript
+import { toSafeNumberOrThrow } from '@haixing_hu/json';
+
+try {
+  console.log(toSafeNumberOrThrow('-12345678901234567890'));
+} catch (e) {
+  console.error(e.message);  // Output: 'Cannot safely convert to number: the value '-12345678901234567890' would truncate integer and become -12345678901234567000'
+}
+
+console.log(toSafeNumberOrThrow('9007199254740991'));  // Output: 9007199254740991
 ```
 
 ## <span id="contributing">Contributing</span>
