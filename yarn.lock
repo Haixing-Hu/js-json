@@ -1510,7 +1510,6 @@ __metadata:
     jest-extended: "npm:^4.0.1"
     jsdoc: "npm:^4.0.2"
     json-custom-numbers: "npm:^3.1.1"
-    lossless-json: "npm:^4.0.1"
     rollup: "npm:^4.1.4"
     rollup-plugin-analyzer: "npm:^4.0.0"
     rollup-plugin-visualizer: "npm:^5.12.0"
@@ -5522,13 +5521,6 @@ __metadata:
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: 10c0/d8cbea072bb08655bb4c989da418994b073a608dffa608b09ac04b43a791b12aeae7cd7ad919aa4c925f33b48490b5cfe6c1f71d827956071dae2e7bb3a6b74c
-  languageName: node
-  linkType: hard
-
-"lossless-json@npm:^4.0.1":
-  version: 4.0.1
-  resolution: "lossless-json@npm:4.0.1"
-  checksum: 10c0/6148f7fad205a1e324deaad5f2a85dad4e5f869a2c111679cc30b940da997493efba19aaa2052b1d5557df98f10f101a781c962671ab59076a33b8830a215d2a
   languageName: node
   linkType: hard
 
