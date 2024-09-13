@@ -8,10 +8,4 @@
 ////////////////////////////////////////////////////////////////////////////////
 import rollupBuilder from '@haixing_hu/rollup-builder';
 
-export default rollupBuilder('Json', import.meta.url, {
-  terserPluginOptions: {
-    output: {
-      comments: false,
-    },
-  },
-});
+export default rollupBuilder('Json', import.meta.url);
