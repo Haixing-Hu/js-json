@@ -220,4 +220,16 @@ describe('Unit test of the Json object', () => {
   it('parsing string representing int', () => {
     expect(Json.parse('"123"')).toBe('123');
   });
+
+  it('stringify null', () => {
+    expect(Json.stringify(null)).toBe('null');
+  });
+
+  it('stringify undefined', () => {
+    expect(Json.stringify(undefined)).toBe(undefined);
+  });
+
+  it('parsing null', () => {
+    expect(Json.parse('null')).toBe(null);
+  });
 });
