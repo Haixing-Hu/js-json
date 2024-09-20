@@ -196,4 +196,28 @@ describe('Unit test of the Json object', () => {
   ]
 }`);
   });
+
+  it('stringify int', () => {
+    expect(Json.stringify(123)).toBe('123');
+  });
+
+  it('stringify bigint', () => {
+    expect(Json.stringify(123n)).toBe('123');
+  });
+
+  it('stringify string representing int', () => {
+    expect(Json.stringify('123')).toBe('"123"');
+  });
+
+  it('parsing int', () => {
+    expect(Json.parse('123')).toBe(123);
+  });
+
+  it('parsing bigint', () => {
+    expect(Json.parse('123456789012134567890')).toBe(123456789012134567890n);
+  });
+
+  it('parsing string representing int', () => {
+    expect(Json.parse('"123"')).toBe('123');
+  });
 });
