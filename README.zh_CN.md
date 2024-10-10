@@ -1,4 +1,4 @@
-# 增强的 JSON 解析和字符串化函数库，支持大整数和集合
+# 增强的 JSON 解析器，支持大整数和集合
 
 [![npm package](https://img.shields.io/npm/v/@haixing_hu/json.svg)](https://npmjs.com/package/@haixing_hu/json)
 [![License](https://img.shields.io/badge/License-Apache-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
