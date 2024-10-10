@@ -1,56 +1,44 @@
-# Enhanced JSON Parsing and Stringification for Large Numbers and Collections
+# 增强的 JSON 解析和字符串化函数库，支持大整数和集合
 
 [![npm package](https://img.shields.io/npm/v/@haixing_hu/json.svg)](https://npmjs.com/package/@haixing_hu/json)
 [![License](https://img.shields.io/badge/License-Apache-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
-[![中文文档](https://img.shields.io/badge/文档-中文版-blue.svg)](README.zh_CN.md)
+[![英文文档](https://img.shields.io/badge/文档-英文版-blue.svg)](README.md)
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/Haixing-Hu/js-json/tree/master.svg?style=shield)](https://dl.circleci.com/status-badge/redirect/gh/Haixing-Hu/js-json/tree/master)
 [![Coverage Status](https://coveralls.io/repos/github/Haixing-Hu/js-json/badge.svg?branch=master)](https://coveralls.io/github/Haixing-Hu/js-json?branch=master)
 
-[@haixing_hu/json]  is a JavaScript library that extends the functionality of the
-standard JSON object, providing robust support for working with numbers that 
-exceed JavaScript’s safe range. It offers enhanced parsing and stringifying 
-capabilities, making it ideal for handling large datasets and complex numerical 
-operations while adhering to JSON’s structure.
+[@haixing_hu/json] 是一个 JavaScript 库，它扩展了标准 JSON 对象的功能，提供了对超出 JavaScript 
+安全范围的大数字的强大支持。该库增强了解析和字符串化能力，使其非常适合处理大型数据集和复杂的数值操作，
+同时保持 JSON 的结构。
 
-## Key Features
+## 主要功能
 
-- `BigInt` Support: When parsing JSON strings, numbers outside JavaScript’s safe 
-  integer range are automatically converted to the native `BigInt`, ensuring 
-  precision is maintained.
-- `LosslessNumber` Handling: For floating-point numbers that cannot be accurately
-  represented in JavaScript, this library introduces the `LosslessNumber` object. 
-  This lightweight object preserves the full precision of the number as a string,
-  allowing flexible conversion to number or `BigInt` for mathematical operations.
-- Accurate Stringification: During the stringify process, `BigInt` values are
-  serialized as strings without the “n” suffix, maintaining compatibility with 
-  the standard JSON format. Similarly, `LosslessNumber` objects are serialized
-  using their internal string representation.
-- Collection Serialization: JavaScript’s native collections like `Set` and `Map`
-  are seamlessly serialized as arrays, allowing for better compatibility with
-  JSON structures.
+- **`BigInt` 支持**：在解析 JSON 字符串时，超出 JavaScript 安全整数范围的数字会自动转换为原生 `BigInt`，
+  确保精度不丢失。
+- **`LosslessNumber` 处理**：对于无法在 JavaScript 中准确表示的浮点数，该库引入了 `LosslessNumber` 对象。
+  这个轻量级对象以字符串形式保存完整的数值精度，允许灵活地转换为数字或 `BigInt` 进行数学运算。
+- **精确的字符串化**：在字符串化过程中，`BigInt` 值会作为字符串序列化，不带 “n” 后缀，以保持与标准 JSON 格式的兼容性。
+  同样，`LosslessNumber` 对象使用其内部字符串表示进行序列化。
+- **集合序列化**：JavaScript 原生的集合类型如 `Set` 和 `Map` 会无缝地序列化为数组，以便更好地与 JSON 结构兼容。
 
-For more details on why JSON parsing can corrupt large numbers and how this 
-library helps resolve the issue, refer to 
-[Why does JSON.parse corrupt large numbers and how to solve this?].
+有关为什么 JSON 解析可能会破坏大数字以及该库如何帮助解决该问题的更多详细信息，请参阅
+[Why does JSON.parse corrupt large numbers and how to solve this?]。
 
-## Installation
+## 安装
 
-To install the library, use either npm or yarn:
+使用 npm 或 yarn 安装该库：
 ```sh
 npm install @haixing_hu/json
 ```
-or
+或
 ```sh
 yarn add @haixing_hu/json
 ```
 
-## Core Functionality
+## 核心功能
 
-### JSON-like Object
+### 类似 JSON 的对象
 
-The library provides an object similar to the standard JSON object, but with
-enhanced capabilities for handling large integers, floating-point numbers, and 
-collections like Set and Map.
+该库提供了一个类似于标准 JSON 对象的对象，但具有增强的功能，用于处理大整数、浮点数以及集合类型如 Set 和 Map。
 
 ```javascript
 import Json from '@haixing_hu/json';
@@ -79,10 +67,9 @@ const json3 = Json.stringify(obj, null, 2);
 console.log(json3); // 
 ```
 
-### LosslessNumber Class
+### LosslessNumber 类
 
-The LosslessNumber class is used to handle floating-point numbers with full
-precision, avoiding truncation or rounding issues.
+`LosslessNumber` 类用于处理具有完整精度的浮点数，避免截断或舍入问题。
 
 ```javascript
 import Json from '@haixing_hu/json';
@@ -93,14 +80,13 @@ console.log(parsed.float);  // LosslessNumber { value: '1.234567891234567891234'
 console.log(parsed.float.valueOf());  // 1.2345678912345679 (standard JS number)
 ```
 
-### Utility Functions
+### 实用函数
 
-This library provides a set of utility functions to aid in the handling of large 
-numbers and ensure safe conversions.
+该库提供了一组实用函数，用于处理大数字并确保安全转换。
 
 #### `isBigInt(value)`
 
-Checks if a string represents a `BigInt` (i.e., ends with an “n” suffix).
+检查一个字符串是否表示 `BigInt`（即是否以 "n" 结尾）。
 
 ```javascript
 import { isBigInt } from '@haixing_hu/json';
@@ -111,7 +97,7 @@ console.log(isBigInt('12345'));   // false
 
 #### `isInteger(value)`
 
-Checks if a string represents an integer.
+检查一个字符串是否表示整数。
 
 ```javascript
 import { isInteger } from '@haixing_hu/json';
@@ -122,7 +108,7 @@ console.log(isInteger('123.45')); // false
 
 #### `isNumber(value)`
 
-Checks if a string represents a number.
+检查一个字符串是否表示数字。
 
 ```javascript
 import { isNumber } from '@haixing_hu/json';
@@ -135,7 +121,7 @@ console.log(isNumber('abc'));       // false
 
 #### `isSafeNumber(value, options)`
 
-Checks if a string represents a number within JavaScript’s safe range.
+检查一个字符串是否表示在 JavaScript 安全范围内的数字。
 
 ```javascript
 import { isSafeNumber } from '@haixing_hu/json';
@@ -148,14 +134,13 @@ console.log(isSafeNumber('123.45678901234567890', { approx: true, requiredDigits
 
 #### `getUnsafeReason(value)`
 
-Explains why a number represented by a string is unsafe, returning one of the 
-following reasons:
+解释为什么由字符串表示的数字不安全，返回以下原因之一：
 
-- `'overflow'`
-- `'underflow'`
-- `'truncate_integer'`
-- `'truncate_float'`
-- `'none'`: when the value is safe
+- `'overflow'`（溢出）
+- `'underflow'`（下溢）
+- `'truncate_integer'`（整数截断）
+- `'truncate_float'`（浮点数截断）
+- `'none'`：当值是安全时
 
 ```javascript
 import { getUnsafeReason } from '@haixing_hu/json';
@@ -169,8 +154,7 @@ console.log(getUnsafeReason('1e-324'));     // Output: 'underflow'
 
 #### `toSafeNumberOrThrow(value, options)`
 
-Converts a string into a number if it is safe to do so. Throws an error if the 
-number is unsafe, explaining the reason.
+如果可以安全转换，将字符串转换为数字。如果数字不安全，则抛出错误并解释原因。
 
 ```javascript
 import { toSafeNumberOrThrow } from '@haixing_hu/json';
@@ -184,32 +168,23 @@ try {
 console.log(toSafeNumberOrThrow('9007199254740991'));  // Output: 9007199254740991
 ```
 
-## <span id="contributing">Contributing</span>
+## <span id="contributing">贡献</span>
 
-If you find any issues or have suggestions for improvements, please feel free
-to open an issue or submit a pull request to the [GitHub repository].
+如果您发现任何问题或有改进建议，请随时在 [GitHub 仓库] 上提交 issue 或 pull request。
 
-## <span id="license">License</span>
+## <span id="license">许可证</span>
 
-[@haixing_hu/json] is distributed under the Apache 2.0 license.
-See the [LICENSE](LICENSE) file for more details.
+[@haixing_hu/json] 根据 Apache 2.0 许可证分发。详情请参阅 [LICENSE](LICENSE) 文件。
 
-## <span id="acknowledgements">Acknowledgements</span>
+## <span id="acknowledgements">致谢</span>
 
-This project builds upon and incorporates code from several open-source libraries
-that have made significant contributions to handling large numbers and custom 
-parsing in JSON. We would like to acknowledge and thank the authors of the
-following projects:
+该项目基于并集成了多个开源库的代码，这些库在处理大数字和自定义 JSON 解析方面做出了重要贡献。我们想特别感谢以下项目的作者：
 
-- [json-bigint]: Provides support for parsing and stringifying JSON with BigInt, 
-  allowing for precise handling of large numbers.
-- [lossless-json]: A library that offers lossless handling of numbers in JSON, 
-  ensuring full precision when dealing with floating-point values.
-- [json-custom-numbers]: Allows for custom handling of numbers in JSON parsing
-  and stringifying, offering flexibility in numerical representation.
+- [json-bigint]：提供对使用 BigInt 解析和字符串化 JSON 的支持，使得可以精确处理大数字。
+- [lossless-json]：一个确保在处理浮点数时保持完全精度的库，提供无损的 JSON 数字处理。
+- [json-custom-numbers]：允许在 JSON 解析和字符串化过程中自定义数字处理，提供灵活的数值表示。
 
-We are grateful for the work of these contributors, which has been instrumental 
-in shaping the functionality of this library.
+我们对这些贡献者的工作表示感谢，这些工作对本库功能的实现起到了至关重要的作用。
 
 [@haixing_hu/json]: https://npmjs.com/package/@haixing_hu/json
 [GitHub repository]: https://github.com/Haixing-Hu/js-json
