@@ -209,15 +209,20 @@ describe('Unit test of the Json object', () => {
     expect(Json.stringify('123')).toBe('"123"');
   });
 
-  it('parsing int', () => {
+  it('stringify LosslessNumber representing int', () => {
+    const v = new LosslessNumber('123456789012134567890');
+    expect(Json.stringify(v)).toBe('123456789012134567890');
+  })
+
+  it('parse int', () => {
     expect(Json.parse('123')).toBe(123);
   });
 
-  it('parsing bigint', () => {
+  it('parse bigint', () => {
     expect(Json.parse('123456789012134567890')).toBe(123456789012134567890n);
   });
 
-  it('parsing string representing int', () => {
+  it('parse string representing int', () => {
     expect(Json.parse('"123"')).toBe('123');
   });
 
@@ -229,7 +234,7 @@ describe('Unit test of the Json object', () => {
     expect(Json.stringify(undefined)).toBe(undefined);
   });
 
-  it('parsing null', () => {
+  it('parse null', () => {
     expect(Json.parse('null')).toBe(null);
   });
 });
