@@ -1,6 +1,6 @@
 {
   "name": "@haixing_hu/json",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "A JavaScript library for parsing and formatting JSON data.",
   "author": "Haixing Hu",
   "license": "Apache-2.0",
@@ -18,12 +18,12 @@
     "logger",
     "decorator"
   ],
-  "main": "dist/json.cjs.min.js",
-  "module": "dist/json.esm.min.mjs",
+  "main": "dist/json.min.cjs",
+  "module": "dist/json.min.mjs",
   "exports": {
     ".": {
-      "require": "./dist/json.cjs.min.js",
-      "import": "./dist/json.esm.min.mjs"
+      "require": "./dist/json.min.cjs",
+      "import": "./dist/json.min.mjs"
     }
   },
   "files": [
@@ -60,7 +60,7 @@
     "@babel/runtime": "^7.23.2",
     "@haixing_hu/eslint-config": "^1.3.3",
     "@haixing_hu/jsdoc-minami": "^1.5.1",
-    "@haixing_hu/rollup-builder": "^1.6.5",
+    "@haixing_hu/rollup-builder": "^1.8.2",
     "@jest/core": "^29.7.0",
     "@rollup/plugin-alias": "^5.0.1",
     "@rollup/plugin-babel": "^6.0.4",
@@ -83,5 +83,5 @@
     "rollup-plugin-analyzer": "^4.0.0",
     "rollup-plugin-visualizer": "^5.12.0"
   },
-  "packageManager": "yarn@4.4.1"
+  "packageManager": "yarn@4.5.0"
 }
