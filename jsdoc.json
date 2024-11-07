@@ -1,6 +1,6 @@
 {
   "opts": {
-    "destination": "./doc",
+    "destination": "./doc/api",
     "recurse": true,
     "encoding": "utf8",
     "template": "./node_modules/@haixing_hu/jsdoc-minami"
