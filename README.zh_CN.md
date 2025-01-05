@@ -1,12 +1,12 @@
 # 增强的 JSON 解析器，支持大整数和集合
 
-[![npm package](https://img.shields.io/npm/v/@haixing_hu/json.svg)](https://npmjs.com/package/@haixing_hu/json)
+[![npm package](https://img.shields.io/npm/v/@qubit-ltd/json.svg)](https://npmjs.com/package/@qubit-ltd/json)
 [![License](https://img.shields.io/badge/License-Apache-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 [![English Document](https://img.shields.io/badge/Document-English-blue.svg)](README.md)
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/Haixing-Hu/js-json/tree/master.svg?style=shield)](https://dl.circleci.com/status-badge/redirect/gh/Haixing-Hu/js-json/tree/master)
 [![Coverage Status](https://coveralls.io/repos/github/Haixing-Hu/js-json/badge.svg?branch=master)](https://coveralls.io/github/Haixing-Hu/js-json?branch=master)
 
-[@haixing_hu/json] 是一个 JavaScript 库，它扩展了标准 JSON 对象的功能，提供了对超出 JavaScript 
+[@qubit-ltd/json] 是一个 JavaScript 库，它扩展了标准 JSON 对象的功能，提供了对超出 JavaScript 
 安全范围的大数字的强大支持。该库增强了解析和字符串化能力，使其非常适合处理大型数据集和复杂的数值操作，
 同时保持 JSON 的结构。
 
@@ -27,11 +27,11 @@
 
 使用 npm 或 yarn 安装该库：
 ```sh
-npm install @haixing_hu/json
+npm install @qubit-ltd/json
 ```
 或
 ```sh
-yarn add @haixing_hu/json
+yarn add @qubit-ltd/json
 ```
 
 ## 核心功能
@@ -41,7 +41,7 @@ yarn add @haixing_hu/json
 该库提供了一个类似于标准 JSON 对象的对象，但具有增强的功能，用于处理大整数、浮点数以及集合类型如 Set 和 Map。
 
 ```javascript
-import Json from '@haixing_hu/json';
+import Json from '@qubit-ltd/json';
 
 // parse numbers outside the safe range
 const str1 = '{"decimal":2.370,"big_int":9123372036854000123,"big_float":2.3e+500}';
@@ -72,7 +72,7 @@ console.log(json3); //
 `LosslessNumber` 类用于处理具有完整精度的浮点数，避免截断或舍入问题。
 
 ```javascript
-import Json from '@haixing_hu/json';
+import Json from '@qubit-ltd/json';
 const parsed = Json.parse('{"float": 1.234567891234567891234}');
 console.log(parsed.float);  // LosslessNumber { value: '1.234567891234567891234' }
 
@@ -89,7 +89,7 @@ console.log(parsed.float.valueOf());  // 1.2345678912345679 (standard JS number)
 检查一个字符串是否表示 `BigInt`（即是否以 "n" 结尾）。
 
 ```javascript
-import { isBigInt } from '@haixing_hu/json';
+import { isBigInt } from '@qubit-ltd/json';
 
 console.log(isBigInt('12345n'));  // true
 console.log(isBigInt('12345'));   // false
@@ -100,7 +100,7 @@ console.log(isBigInt('12345'));   // false
 检查一个字符串是否表示整数。
 
 ```javascript
-import { isInteger } from '@haixing_hu/json';
+import { isInteger } from '@qubit-ltd/json';
 
 console.log(isInteger('12345'));  // true
 console.log(isInteger('123.45')); // false
@@ -111,7 +111,7 @@ console.log(isInteger('123.45')); // false
 检查一个字符串是否表示数字。
 
 ```javascript
-import { isNumber } from '@haixing_hu/json';
+import { isNumber } from '@qubit-ltd/json';
 
 console.log(isNumber('12345'));     // true
 console.log(isNumber('-123.45'));   // true
@@ -124,7 +124,7 @@ console.log(isNumber('abc'));       // false
 检查一个字符串是否表示在 JavaScript 安全范围内的数字。
 
 ```javascript
-import { isSafeNumber } from '@haixing_hu/json';
+import { isSafeNumber } from '@qubit-ltd/json';
 
 console.log(isSafeNumber('12345'));     // true
 console.log(isSafeNumber('12345678901234567890')); // false
@@ -143,7 +143,7 @@ console.log(isSafeNumber('123.45678901234567890', { approx: true, requiredDigits
 - `'none'`：当值是安全时
 
 ```javascript
-import { getUnsafeReason } from '@haixing_hu/json';
+import { getUnsafeReason } from '@qubit-ltd/json';
 
 console.log(getUnsafeReason('12345'));     // Output: 'none'
 console.log(getUnsafeReason('12345678901234567890')); // Output: 'truncate_integer'
@@ -157,7 +157,7 @@ console.log(getUnsafeReason('1e-324'));     // Output: 'underflow'
 如果可以安全转换，将字符串转换为数字。如果数字不安全，则抛出错误并解释原因。
 
 ```javascript
-import { toSafeNumberOrThrow } from '@haixing_hu/json';
+import { toSafeNumberOrThrow } from '@qubit-ltd/json';
 
 try {
   console.log(toSafeNumberOrThrow('-12345678901234567890'));
@@ -174,7 +174,7 @@ console.log(toSafeNumberOrThrow('9007199254740991'));  // Output: 90071992547409
 
 ## <span id="license">许可证</span>
 
-[@haixing_hu/json] 根据 Apache 2.0 许可证分发。详情请参阅 [LICENSE](LICENSE) 文件。
+[@qubit-ltd/json] 根据 Apache 2.0 许可证分发。详情请参阅 [LICENSE](LICENSE) 文件。
 
 ## <span id="acknowledgements">致谢</span>
 
@@ -186,7 +186,7 @@ console.log(toSafeNumberOrThrow('9007199254740991'));  // Output: 90071992547409
 
 我们对这些贡献者的工作表示感谢，这些工作对本库功能的实现起到了至关重要的作用。
 
-[@haixing_hu/json]: https://npmjs.com/package/@haixing_hu/json
+[@qubit-ltd/json]: https://npmjs.com/package/@qubit-ltd/json
 [GitHub repository]: https://github.com/Haixing-Hu/js-json
 [Why does JSON.parse corrupt large numbers and how to solve this?]: https://jsoneditoronline.org/indepth/parse/why-does-json-parse-corrupt-large-numbers/
 [json-bigint]: https://github.com/sidorares/json-bigint

@@ -1,12 +1,12 @@
 # Enhanced JSON Parsing and Stringification for Large Numbers and Collections
 
-[![npm package](https://img.shields.io/npm/v/@haixing_hu/json.svg)](https://npmjs.com/package/@haixing_hu/json)
+[![npm package](https://img.shields.io/npm/v/@qubit-ltd/json.svg)](https://npmjs.com/package/@qubit-ltd/json)
 [![License](https://img.shields.io/badge/License-Apache-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 [![中文文档](https://img.shields.io/badge/文档-中文版-blue.svg)](README.zh_CN.md)
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/Haixing-Hu/js-json/tree/master.svg?style=shield)](https://dl.circleci.com/status-badge/redirect/gh/Haixing-Hu/js-json/tree/master)
 [![Coverage Status](https://coveralls.io/repos/github/Haixing-Hu/js-json/badge.svg?branch=master)](https://coveralls.io/github/Haixing-Hu/js-json?branch=master)
 
-[@haixing_hu/json]  is a JavaScript library that extends the functionality of the
+[@qubit-ltd/json]  is a JavaScript library that extends the functionality of the
 standard JSON object, providing robust support for working with numbers that 
 exceed JavaScript’s safe range. It offers enhanced parsing and stringifying 
 capabilities, making it ideal for handling large datasets and complex numerical 
@@ -37,11 +37,11 @@ library helps resolve the issue, refer to
 
 To install the library, use either npm or yarn:
 ```sh
-npm install @haixing_hu/json
+npm install @qubit-ltd/json
 ```
 or
 ```sh
-yarn add @haixing_hu/json
+yarn add @qubit-ltd/json
 ```
 
 ## Core Functionality
@@ -53,7 +53,7 @@ enhanced capabilities for handling large integers, floating-point numbers, and
 collections like Set and Map.
 
 ```javascript
-import Json from '@haixing_hu/json';
+import Json from '@qubit-ltd/json';
 
 // parse numbers outside the safe range
 const str1 = '{"decimal":2.370,"big_int":9123372036854000123,"big_float":2.3e+500}';
@@ -85,7 +85,7 @@ The LosslessNumber class is used to handle floating-point numbers with full
 precision, avoiding truncation or rounding issues.
 
 ```javascript
-import Json from '@haixing_hu/json';
+import Json from '@qubit-ltd/json';
 const parsed = Json.parse('{"float": 1.234567891234567891234}');
 console.log(parsed.float);  // LosslessNumber { value: '1.234567891234567891234' }
 
@@ -103,7 +103,7 @@ numbers and ensure safe conversions.
 Checks if a string represents a `BigInt` (i.e., ends with an “n” suffix).
 
 ```javascript
-import { isBigInt } from '@haixing_hu/json';
+import { isBigInt } from '@qubit-ltd/json';
 
 console.log(isBigInt('12345n'));  // true
 console.log(isBigInt('12345'));   // false
@@ -114,7 +114,7 @@ console.log(isBigInt('12345'));   // false
 Checks if a string represents an integer.
 
 ```javascript
-import { isInteger } from '@haixing_hu/json';
+import { isInteger } from '@qubit-ltd/json';
 
 console.log(isInteger('12345'));  // true
 console.log(isInteger('123.45')); // false
@@ -125,7 +125,7 @@ console.log(isInteger('123.45')); // false
 Checks if a string represents a number.
 
 ```javascript
-import { isNumber } from '@haixing_hu/json';
+import { isNumber } from '@qubit-ltd/json';
 
 console.log(isNumber('12345'));     // true
 console.log(isNumber('-123.45'));   // true
@@ -138,7 +138,7 @@ console.log(isNumber('abc'));       // false
 Checks if a string represents a number within JavaScript’s safe range.
 
 ```javascript
-import { isSafeNumber } from '@haixing_hu/json';
+import { isSafeNumber } from '@qubit-ltd/json';
 
 console.log(isSafeNumber('12345'));     // true
 console.log(isSafeNumber('12345678901234567890')); // false
@@ -158,7 +158,7 @@ following reasons:
 - `'none'`: when the value is safe
 
 ```javascript
-import { getUnsafeReason } from '@haixing_hu/json';
+import { getUnsafeReason } from '@qubit-ltd/json';
 
 console.log(getUnsafeReason('12345'));     // Output: 'none'
 console.log(getUnsafeReason('12345678901234567890')); // Output: 'truncate_integer'
@@ -173,7 +173,7 @@ Converts a string into a number if it is safe to do so. Throws an error if the
 number is unsafe, explaining the reason.
 
 ```javascript
-import { toSafeNumberOrThrow } from '@haixing_hu/json';
+import { toSafeNumberOrThrow } from '@qubit-ltd/json';
 
 try {
   console.log(toSafeNumberOrThrow('-12345678901234567890'));
@@ -191,7 +191,7 @@ to open an issue or submit a pull request to the [GitHub repository].
 
 ## <span id="license">License</span>
 
-[@haixing_hu/json] is distributed under the Apache 2.0 license.
+[@qubit-ltd/json] is distributed under the Apache 2.0 license.
 See the [LICENSE](LICENSE) file for more details.
 
 ## <span id="acknowledgements">Acknowledgements</span>
@@ -211,7 +211,7 @@ following projects:
 We are grateful for the work of these contributors, which has been instrumental 
 in shaping the functionality of this library.
 
-[@haixing_hu/json]: https://npmjs.com/package/@haixing_hu/json
+[@qubit-ltd/json]: https://npmjs.com/package/@qubit-ltd/json
 [GitHub repository]: https://github.com/Haixing-Hu/js-json
 [Why does JSON.parse corrupt large numbers and how to solve this?]: https://jsoneditoronline.org/indepth/parse/why-does-json-parse-corrupt-large-numbers/
 [json-bigint]: https://github.com/sidorares/json-bigint
