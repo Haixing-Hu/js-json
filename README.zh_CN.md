@@ -187,7 +187,7 @@ console.log(toSafeNumberOrThrow('9007199254740991'));  // Output: 90071992547409
 我们对这些贡献者的工作表示感谢，这些工作对本库功能的实现起到了至关重要的作用。
 
 [@qubit-ltd/json]: https://npmjs.com/package/@qubit-ltd/json
-[GitHub repository]: https://github.com/Haixing-Hu/js-json
+[GitHub 仓库]: https://github.com/Haixing-Hu/js-json
 [Why does JSON.parse corrupt large numbers and how to solve this?]: https://jsoneditoronline.org/indepth/parse/why-does-json-parse-corrupt-large-numbers/
 [json-bigint]: https://github.com/sidorares/json-bigint
 [lossless-json]: https://github.com/josdejong/lossless-json
