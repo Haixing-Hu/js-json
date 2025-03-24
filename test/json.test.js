@@ -237,4 +237,8 @@ describe('Unit test of the Json object', () => {
   it('parse null', () => {
     expect(Json.parse('null')).toBe(null);
   });
+
+  it('parse timestamp string', () => {
+    expect(Json.parse('"2025-01-10T07:40:08.140Z"')).toBe('2025-01-10T07:40:08.140Z');
+  });
 });
