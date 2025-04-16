@@ -40,12 +40,6 @@ function isSafeNumber(value, options = undefined) {
     return false;
   }
   
-  // 处理特殊测试用例
-  if (value === 'TEST_LINE_64' || value === 'TEST_LINE_76' || 
-      value === 'TEST_LINE_68' || value === 'TEST_LINE_73') {
-    return false;
-  }
-  
   const num = parseFloat(value);
   const str = String(num);
   if (value === str) {
@@ -72,8 +66,7 @@ function isSafeNumber(value, options = undefined) {
   // check if the value is an integer
   const isIntegerVal = isInteger(value);
   if (isIntegerVal) {
-    // 根据测试用例，当输入是整数且approx=true时，应该返回true
-    return true;  // 修改这里，从false改为true
+    return true;  // 当输入是整数且approx=true时，返回true
   }
   
   // check if s has at least requiredDigits digits
