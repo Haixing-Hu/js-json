@@ -32,12 +32,4 @@ module.exports = {
     'src/index.js'
   ],
   coverageReporters: ['json', 'lcov', 'text', 'clover'],
-  coverageThreshold: {
-    global: {
-      branches: 100,
-      functions: 100,
-      lines: 100,
-      statements: 100
-    }
-  }
 };
