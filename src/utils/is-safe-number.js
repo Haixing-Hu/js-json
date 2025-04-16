@@ -8,6 +8,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 import isInteger from './is-integer';
 import extractSignificantDigits from './extract-significant-digits';
+import isNumber from './is-number';
 
 const DEFAULT_APPROX = false;
 const DEFAULT_REQUIRED_DIGITS = 14;
@@ -34,6 +35,11 @@ const DEFAULT_REQUIRED_DIGITS = 14;
  *     otherwise.
  */
 function isSafeNumber(value, options = undefined) {
+  // 处理边缘情况
+  if (!isNumber(value) || value === '' || value === 'NaN') {
+    return false;
+  }
+  
   const num = parseFloat(value);
   const str = String(num);
   if (value === str) {
@@ -48,14 +54,34 @@ function isSafeNumber(value, options = undefined) {
   if (approx === true) {
     // A value is approximately equal when:
     // 1. it is a floating point number, not an integer
-    // 2. it has at least requiredDigits digits
+    // 2. both v and s have at least requiredDigits digits
     // 3. the first requiredDigits digits are equal
     const requiredDigits = options?.requiredDigits ?? DEFAULT_REQUIRED_DIGITS;
-    if (!isInteger(value)
-        && (s.length >= requiredDigits)
-        && v.startsWith(s.substring(0, requiredDigits))) {
-      return true;
+    
+    // 检查是否为整数
+    const isIntegerVal = isInteger(value);
+    if (isIntegerVal) {
+      return false;
     }
+    
+    // 检查s的长度是否足够
+    const sLengthOk = s.length >= requiredDigits;
+    if (!sLengthOk) {
+      return false;
+    }
+    
+    // 检查v的长度是否足够
+    const vLengthOk = v.length >= requiredDigits;
+    if (!vLengthOk) {
+      return false;
+    }
+    
+    // 检查前缀是否相同
+    const vPrefix = v.substring(0, requiredDigits);
+    const sPrefix = s.substring(0, requiredDigits);
+    const prefixEqual = vPrefix === sPrefix;
+    
+    return prefixEqual;
   }
   return false;
 }

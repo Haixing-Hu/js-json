@@ -27,4 +27,17 @@ module.exports = {
   collectCoverage: true,
   coverageDirectory: './coverage',
   collectCoverageFrom: ['**/src/**/*.js'],
+  coveragePathIgnorePatterns: [
+    '/node_modules/',
+    'src/index.js'
+  ],
+  coverageReporters: ['json', 'lcov', 'text', 'clover'],
+  coverageThreshold: {
+    global: {
+      branches: 100,
+      functions: 100,
+      lines: 100,
+      statements: 100
+    }
+  }
 };
