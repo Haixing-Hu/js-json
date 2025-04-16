@@ -35,7 +35,7 @@ const DEFAULT_REQUIRED_DIGITS = 14;
  *     otherwise.
  */
 function isSafeNumber(value, options = undefined) {
-  // 处理边缘情况
+  // handle the edge cases
   if (!isNumber(value) || value === '' || value === 'NaN') {
     return false;
   }
@@ -51,7 +51,7 @@ function isSafeNumber(value, options = undefined) {
     return true;
   }
   
-  // 使用默认选项
+  // use the default options
   const approx = options?.approx ?? DEFAULT_APPROX;
   if (!approx) {
     return false;
@@ -66,7 +66,7 @@ function isSafeNumber(value, options = undefined) {
   // check if the value is an integer
   const isIntegerVal = isInteger(value);
   if (isIntegerVal) {
-    return true;  // 当输入是整数且approx=true时，返回true
+    return true;  // when the input is an integer and approx=true, return true
   }
   
   // check if s has at least requiredDigits digits
@@ -84,7 +84,7 @@ function isSafeNumber(value, options = undefined) {
     const sPrefix = s.substring(0, requiredDigits);
     return vPrefix === sPrefix;
   } else {
-    // 如果v长度不够，则直接返回true
+    // if v length is not enough, return true
     return true;
   }
 }
