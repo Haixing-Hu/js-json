@@ -39,7 +39,7 @@ function isSafeNumber(value, options = undefined) {
   if (!isNumber(value) || value === '' || value === 'NaN') {
     return false;
   }
-  
+
   const num = parseFloat(value);
   const str = String(num);
   if (value === str) {
@@ -50,34 +50,34 @@ function isSafeNumber(value, options = undefined) {
   if (v === s) {
     return true;
   }
-  
+
   // use the default options
   const approx = options?.approx ?? DEFAULT_APPROX;
   if (!approx) {
     return false;
   }
-  
+
   // A value is approximately equal when:
   // 1. it is a floating point number, not an integer
   // 2. both v and s have at least requiredDigits digits
   // 3. the first requiredDigits digits are equal
   const requiredDigits = options?.requiredDigits ?? DEFAULT_REQUIRED_DIGITS;
-  
+
   // check if the value is an integer
   const isIntegerVal = isInteger(value);
   if (isIntegerVal) {
     return true;  // when the input is an integer and approx=true, return true
   }
-  
+
   // check if s has at least requiredDigits digits
   const sLengthOk = s.length >= requiredDigits;
   if (!sLengthOk) {
     return false;
   }
-  
+
   // check if v has at least requiredDigits digits
   const vLengthOk = v.length >= requiredDigits;
-  
+
   if (vLengthOk) {
     // check if the first requiredDigits digits are equal
     const vPrefix = v.substring(0, requiredDigits);
